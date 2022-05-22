@@ -5,14 +5,28 @@
 <script type="text/javascript">
     //Anastasia Lurye ID: 332644848
     //Tom Zur ID: 208287516
-
     function sleepFor(sleepDuration){
         const current = new Date().getTime();
         while(new Date().getTime() < current + sleepDuration){
             /* Do nothing */
         }
     }
-    $(document).ready(setInterval(function() {
+
+    function foo (src){
+        arr.push(new Image());
+        arr[arr.length-1].src=src;
+        console.log(arr[arr.length-1].src);
+       // console.log(src);
+        /*for (image in array)
+        {
+            //imageObj.src=image.i;
+            imageObj.src="https://www.gomeltourist.com/wp-content/uploads/2021/11/Travel.jpg";
+        }
+
+         */
+    }
+
+    $(window).on('load',setInterval(function() {
             const now = new Date();
         const messages =  {
             ad1: {
@@ -168,21 +182,29 @@
         console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
         break;
     } else {*/
-                                console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
-                                $("body").load(messages[x].template, function () {
-                                    for (image in messages[x].img)
-                                        $("picture").append("<img src=\"" + messages[x].img[image].i + "\" loading='eager' style=\"height:200px;\" />");
-                                    //$("body").append("<img src=\"" + messages[x].img[image].i + "\" />");
 
+                            console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
+                            arr = new Array();
+                            for (image in messages[x].img) {
+                                foo(messages[x].img[image].i);
+                            }
+                            arr[(arr.length)-1].onload = function () {
+                                $("body").load(messages[x].template, function () {
+                                    //for (image in messages[x].img)
+                                    //$("picture").append("<img src=\"" + messages[x].img[image].i + "\" loading='eager' style=\"height:200px;\" />");
+                                    for (var k =0; k<arr.length-1; k++)
+                                        $("picture").append(arr[k]);
                                     $("h1").replaceWith("<h1>" + messages[x].name + "</h1>");
                                     $("#text").remove();
-                                   // for (line in messages[x].text)
-                                     //   $("body").append("<p>" + messages[x].text[line].l + "</p>");
+                                    for (line in messages[x].text)
+                                        $("body").append("<p>" + messages[x].text[line].l + "</p>");
                                     sleepFor(messages[x].duration);
 
                                 });
-
                             }
+                        }
+
+
                         //}
                     }
 }),5000);

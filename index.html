@@ -4,7 +4,7 @@
 <script type="text/javascript">
     //Anastasia Lurye ID: 332644848
     //Tom Zur ID: 208287516
-
+const short = 500;
     $(document).ready(function(){
             const now = new Date();
             const messages =  [
@@ -31,7 +31,7 @@
                                 }
                             }
                         },
-                    duration: 5000,
+                    duration: short
                 },
                 {
                     name: "Our response to the war in Ukraine",
@@ -56,55 +56,55 @@
                                 }
                             }
                         },
-                    duration: 5000,
+                    duration: short
                 },
-            {
-                name: "Empty",
-                template: "./templateC.html",
-                times:
-                    {
-                        t1: {
-                            dates: {
-                                from: new Date('2022-5-1'),
-                                to: new Date('2022-6-15')
-                            },
-                            days: [0, 1, 2, 3, 4, 5, 6],
-                            hours: {
-                                from: 8,
-                                to: 22
-                            },
-                            minutes: {
-                                from: 0,
-                                to: 0,
+                {
+                    name: "Empty",
+                    template: "./templateC.html",
+                    times:
+                        {
+                            t1: {
+                                dates: {
+                                    from: new Date('2022-5-1'),
+                                    to: new Date('2022-6-15')
+                                },
+                                days: [0, 1, 2, 3, 4, 5, 6],
+                                hours: {
+                                    from: 8,
+                                    to: 22
+                                },
+                                minutes: {
+                                    from: 0,
+                                    to: 0,
+                                }
                             }
-                        }
-                    },
-                duration: 5000,
-            },
-            {
-                name: "Coming Soon",
-                template: "./templateA.html",
-                text: [{l:"We will be celebrating the launch of our site very soon!"},{l:"Sign up to be notified!"},],
-                times:
-                    {
-                        t1: {
-                            dates: {
-                                from: new Date('2022-3-29'),
-                                to: new Date('2022-4-15')
-                            },
-                            days: [1],
-                            hours: {
-                                from: 15,
-                                to: 19
-                            },
-                            minutes: {
-                                from: 0,
-                                to: 0,
+                        },
+                    duration: 5000
+                },
+                {
+                    name: "Coming Soon",
+                    template: "./templateA.html",
+                    text: [{l:"We will be celebrating the launch of our site very soon!"},{l:"Sign up to be notified!"},],
+                    times:
+                        {
+                            t1: {
+                                dates: {
+                                    from: new Date('2022-3-29'),
+                                    to: new Date('2022-4-15')
+                                },
+                                days: [1],
+                                hours: {
+                                    from: 15,
+                                    to: 19
+                                },
+                                minutes: {
+                                    from: 0,
+                                    to: 0,
+                                }
                             }
-                        }
-                    },
-                duration: 5000,
-            },
+                        },
+                    duration: short
+                },
                 {
                     name: "Fast Food",
                     template: "./templateB.html",
@@ -129,57 +129,55 @@
                                 }
                             }
                         },
-                    duration: 5000,
+                    duration: short
                 }
             ];
-            var x=0;
+            var x=-1;
             setInterval(function() {
-                //$('body').show;
-                console.log(x + "_______________");
+                before(after());
                 function before() {
+                    console.log(messages[x].duration);
                     for (const t in messages[x].times) { //Each time range
-                    /*
-    }
-    if (now >= messages[x].times[t].dates.from && now <= messages[x].times[t].dates.to)
-    console.log("yes " + now.toLocaleDateString() + " is in " + messages[x].times[t].dates.from.toLocaleDateString() + " to " + messages[x].times[t].dates.to.toLocaleDateString())
-    else {
-    console.log("no " + now.toLocaleDateString() + " is not in " + messages[x].times[t].dates.from.toLocaleDateString() + " to " + messages[x].times[t].dates.to.toLocaleDateString())
-    break;
-    }
-    if (-1 != messages[x].times[t].days.indexOf(now.getDay()))
-    console.log("yes " + now.getDay() + " is in " + messages[x].times[t].days);
-    else {
-    console.log("no " + now.getDay() + " is not in " + messages[x].times[t].days)
-    break;
-    }
-    if (now.getHours() >= messages[x].times[t].hours.from && now.getHours() <= messages[x].times[t].hours.to)
-    console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
-    else {
-    console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
-    break;
-    }
-    if ((now.getHours() == messages[x].times[t].hours.from && now.getMinutes() < messages[x].times[t].minutes.from) || ((now.getHours() == messages[x].times[t].hours.to) && (now.getMinutes() > messages[x].times[t].minutes.to))) {
-    console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
-    break;
-    } else {*/
-                    //console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
+
+                        /*
+        }
+        if (now >= messages[x].times[t].dates.from && now <= messages[x].times[t].dates.to)
+        console.log("yes " + now.toLocaleDateString() + " is in " + messages[x].times[t].dates.from.toLocaleDateString() + " to " + messages[x].times[t].dates.to.toLocaleDateString())
+        else {
+        console.log("no " + now.toLocaleDateString() + " is not in " + messages[x].times[t].dates.from.toLocaleDateString() + " to " + messages[x].times[t].dates.to.toLocaleDateString())
+        break;
+        }
+        if (-1 != messages[x].times[t].days.indexOf(now.getDay()))
+        console.log("yes " + now.getDay() + " is in " + messages[x].times[t].days);
+        else {
+        console.log("no " + now.getDay() + " is not in " + messages[x].times[t].days)
+        break;
+        }
+        if (now.getHours() >= messages[x].times[t].hours.from && now.getHours() <= messages[x].times[t].hours.to)
+        console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
+        else {
+        console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
+        break;
+        }
+        if ((now.getHours() == messages[x].times[t].hours.from && now.getMinutes() < messages[x].times[t].minutes.from) || ((now.getHours() == messages[x].times[t].hours.to) && (now.getMinutes() > messages[x].times[t].minutes.to))) {
+        console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
+        break;
+        } else {*/
+                        //console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
                         $("body").load(messages[x].template, function () {
-                        console.log(x + "after template");
-                        for (image in messages[x].img)
-                            $("picture").append("<img src=\"" + messages[x].img[image].i + "\"style=\"height:200px;\" />");
+                            for (image in messages[x].img)
+                                $("picture").append("<img src=\"" + messages[x].img[image].i + "\"style=\"height:200px;\" />");
                             $("h1").replaceWith("<h1>" + messages[x].name + "</h1>");
                             $("#text").remove();
-                        for (line in messages[x].text)
-                            $("body").append("<p>" + messages[x].text[line].l + "</p>");
+                            for (line in messages[x].text)
+                                $("body").append("<p>" + messages[x].text[line].l + "</p>");
                         });
                     }
-                //callback;
                 }
                 function after() {
                     x < (messages.length - 1) ? x++ : x = 0;
                 }
-                before(after());
-            },2000);
+            },messages[x+1].duration);
         }
 
     );

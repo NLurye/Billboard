@@ -158,39 +158,35 @@
                 before(later(after()));
                 function before() {
                     for (const t in messages[x].times) { //Each time range
-                        if (now >= messages[x].times[t].dates.from && now <= messages[x].times[t].dates.to)
+                        if (now >= messages[x].times[t].dates.from && now <= messages[x].times[t].dates.to) {
                             console.log("yes " + now.toLocaleDateString() + " is in " + messages[x].times[t].dates.from.toLocaleDateString() + " to " + messages[x].times[t].dates.to.toLocaleDateString())
-                        else {
+                            if (-1 != messages[x].times[t].days.indexOf(now.getDay())) {
+                                console.log("yes " + now.getDay() + " is in " + messages[x].times[t].days);
+                                if (now.getHours() >= messages[x].times[t].hours.from && now.getHours() <= messages[x].times[t].hours.to) {
+                                    console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
+                                    if ((now.getHours() == messages[x].times[t].hours.from && now.getMinutes() < messages[x].times[t].minutes.from) || ((now.getHours() == messages[x].times[t].hours.to) && (now.getMinutes() > messages[x].times[t].minutes.to))) {
+                                        console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
+                                    }
+                                    else {
+                                        console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
+                                    }
+                                    $("body").load(messages[x].template, function () {
+                                        for (image in messages[x].img)
+                                            $("picture").append("<img src=\"" + messages[x].img[image].i + "\"style=\"height:200px;\" />");
+                                        $("h1").replaceWith("<h1>" + messages[x].name + "</h1>");
+                                        $("#text").remove();
+                                        for (line in messages[x].text)
+                                            $("body").append("<p>" + messages[x].text[line].l + "</p>");
+                                    });
+                                }
+                                else
+                                    console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
+                            }
+                            else
+                                console.log("no " + now.getDay() + " is not in " + messages[x].times[t].days)
+                        }
+                        else
                             console.log("no " + now.toLocaleDateString() + " is not in " + messages[x].times[t].dates.from.toLocaleDateString() + " to " + messages[x].times[t].dates.to.toLocaleDateString())
-                            break;
-                        }
-                        if (-1 != messages[x].times[t].days.indexOf(now.getDay()))
-                            console.log("yes " + now.getDay() + " is in " + messages[x].times[t].days);
-                        else {
-                            console.log("no " + now.getDay() + " is not in " + messages[x].times[t].days)
-                            break;
-                        }
-                        if (now.getHours() >= messages[x].times[t].hours.from && now.getHours() <= messages[x].times[t].hours.to)
-                            console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
-                        else {
-                            console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
-                            break;
-                        }
-                        if ((now.getHours() == messages[x].times[t].hours.from && now.getMinutes() < messages[x].times[t].minutes.from) || ((now.getHours() == messages[x].times[t].hours.to) && (now.getMinutes() > messages[x].times[t].minutes.to))) {
-                            console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
-                            break;
-                        }
-                        else {
-                            console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
-                        }
-                        $("body").load(messages[x].template, function () {
-                            for (image in messages[x].img)
-                                $("picture").append("<img src=\"" + messages[x].img[image].i + "\"style=\"height:200px;\" />");
-                            $("h1").replaceWith("<h1>" + messages[x].name + "</h1>");
-                            $("#text").remove();
-                            for (line in messages[x].text)
-                                $("body").append("<p>" + messages[x].text[line].l + "</p>");
-                        });
                     }
                 }
 

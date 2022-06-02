@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src='./server.js'>
+    var sNum = require('./server.js');
+    console.log(sNum);
+</script>;
 <script type="text/javascript">
     //Anastasia Lurye ID: 332644848
     //Tom Zur ID: 208287516
+
     $(document).ready(function () {
             const now = new Date();
             const messages = [
@@ -189,12 +194,10 @@
                             console.log("no " + now.toLocaleDateString() + " is not in " + messages[x].times[t].dates.from.toLocaleDateString() + " to " + messages[x].times[t].dates.to.toLocaleDateString())
                     }
                 }
-
                 function after() {
                     x < (messages.length - 1) ? x++ : x = 0;
                     console.log("Add "+x+"____________________________");
                 }
-
                 function later() {
                     clearInterval(run);
                     run = setInterval(arrIterator, messages[x].duration);

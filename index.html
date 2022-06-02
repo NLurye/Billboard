@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src='./server.js'>
-    var sNum = require('./server.js');
-    console.log(sNum);
-</script>;
 <script type="text/javascript">
     //Anastasia Lurye ID: 332644848
     //Tom Zur ID: 208287516
-
+    let Snum = 3;
     $(document).ready(function () {
             const now = new Date();
             const messages = [
@@ -157,46 +153,44 @@
                     screen: [3]
                 }
             ];
-            var x = -1;
+            let x = -1;
             let run = setInterval(arrIterator, messages[x + 1].duration);
             function arrIterator() {
                 before(later(after()));
                 function before() {
-                    for (const t in messages[x].times) { //Each time range
-                        if (now >= messages[x].times[t].dates.from && now <= messages[x].times[t].dates.to) {
-                            console.log("yes " + now.toLocaleDateString() + " is in " + messages[x].times[t].dates.from.toLocaleDateString() + " to " + messages[x].times[t].dates.to.toLocaleDateString())
-                            if (-1 != messages[x].times[t].days.indexOf(now.getDay())) {
-                                console.log("yes " + now.getDay() + " is in " + messages[x].times[t].days);
-                                if (now.getHours() >= messages[x].times[t].hours.from && now.getHours() <= messages[x].times[t].hours.to) {
-                                    console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
-                                    if ((now.getHours() == messages[x].times[t].hours.from && now.getMinutes() < messages[x].times[t].minutes.from) || ((now.getHours() == messages[x].times[t].hours.to) && (now.getMinutes() > messages[x].times[t].minutes.to))) {
-                                        console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
-                                    }
-                                    else {
-                                        console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
-                                    }
-                                    $("body").load(messages[x].template, function () {
-                                        for (image in messages[x].img)
-                                            $("picture").append("<img src=\"" + messages[x].img[image].i + "\"style=\"height:200px;\" />");
-                                        $("h1").replaceWith("<h1>" + messages[x].name + "</h1>");
-                                        $("#text").remove();
-                                        for (line in messages[x].text)
-                                            $("body").append("<p>" + messages[x].text[line].l + "</p>");
-                                    });
-                                }
-                                else
-                                    console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
-                            }
-                            else
-                                console.log("no " + now.getDay() + " is not in " + messages[x].times[t].days)
+                    if (messages[x].screen.includes(Snum)) {
+                        console.log("Add "+x+" displays on this screen");
+                        for (const t in messages[x].times) { //Each time range
+                            if (now >= messages[x].times[t].dates.from && now <= messages[x].times[t].dates.to) {
+                                console.log("yes " + now.toLocaleDateString() + " is in " + messages[x].times[t].dates.from.toLocaleDateString() + " to " + messages[x].times[t].dates.to.toLocaleDateString())
+                                if (-1 !== messages[x].times[t].days.indexOf(now.getDay())) {
+                                    console.log("yes " + now.getDay() + " is in " + messages[x].times[t].days);
+                                    if (now.getHours() >= messages[x].times[t].hours.from && now.getHours() <= messages[x].times[t].hours.to) {
+                                        console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
+                                        if ((now.getHours() == messages[x].times[t].hours.from && now.getMinutes() < messages[x].times[t].minutes.from) || ((now.getHours() == messages[x].times[t].hours.to) && (now.getMinutes() > messages[x].times[t].minutes.to))) {
+                                            console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
+                                        } else {
+                                            console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
+                                        }
+                                        $("body").load(messages[x].template, function () {
+                                            for (let image in messages[x].img)
+                                                $("picture").append("<img src=\"" + messages[x].img[image].i + "\"style=\"height:200px;\" />");
+                                            $("h1").replaceWith("<h1>" + messages[x].name + "</h1>");
+                                            $("#text").remove();
+                                            for (let line in messages[x].text)
+                                                $("body").append("<p>" + messages[x].text[line].l + "</p>");
+                                        });
+                                    } else
+                                        console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
+                                } else
+                                    console.log("no " + now.getDay() + " is not in " + messages[x].times[t].days)
+                            } else
+                                console.log("no " + now.toLocaleDateString() + " is not in " + messages[x].times[t].dates.from.toLocaleDateString() + " to " + messages[x].times[t].dates.to.toLocaleDateString())
                         }
-                        else
-                            console.log("no " + now.toLocaleDateString() + " is not in " + messages[x].times[t].dates.from.toLocaleDateString() + " to " + messages[x].times[t].dates.to.toLocaleDateString())
                     }
                 }
                 function after() {
                     x < (messages.length - 1) ? x++ : x = 0;
-                    console.log("Add "+x+"____________________________");
                 }
                 function later() {
                     clearInterval(run);
@@ -205,7 +199,6 @@
             }
         }
     );
-
 </script>
 <head>
     <meta charset="UTF-8">

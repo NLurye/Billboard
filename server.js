@@ -14,9 +14,13 @@ const express = require('express');
 const myDB = require("./db");
 const app = express();
 let arr =[];
-myDB.createMsgsCollection(myDB.chooseMsgs());
 
-
+//app.get('/screen=:num', function(req, res){
+function foo(){
+    console.log(myDB.ress);
+}
+    myDB.createMsgsCollection(myDB.chooseMsgs(foo()));
+//});
 
 
 

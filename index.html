@@ -6,69 +6,36 @@
     //Tom Zur ID: 208287516
     let Snum = 0;
     $(document).ready(function () {
-            const now = new Date();
-            [object Object],[object Object],[object Object][];
-            let x = -1;
-            let run = setInterval(arrIterator, messages[x + 1].duration);
+        const now = new Date();
+        let x = -1;
+        let run = setInterval(arrIterator, messages[x + 1].duration);
 
-            function arrIterator() {
-                before(later(after()));
+        function arrIterator() {
+            before(later(after()));
 
-                function before() {
-                    if (messages[x].screen.includes(Snum)) {
-                        console.log("Add " + (x + 1) + " displays on this screen");
-                        for (const t in messages[x].times) { //Each time range
+            function before() {
+                console.log("Add " + (x + 1) + " displays on this screen");
+                $("body").load(messages[x].template, function () {
+                    for (let image in messages[x].img)
+                            $("picture").append("<img src=\"" + messages[x].img[image].i + "\"style=\"height:200px;\" />");
+                    $("h1").replaceWith("<h1>" + messages[x].name + "</h1>");
+                    $("#text").remove();
+                    for (let line in messages[x].text)
+                        $("body").append("<p>" + messages[x].text[line].l + "</p>");
+                });
+            }
 
-                            $("body").load(messages[x].template, function () {
-                                for (let image in messages[x].img)
-                                    $("picture").append("<img src=\"" + messages[x].img[image].i + "\"style=\"height:200px;\" />");
-                                $("h1").replaceWith("<h1>" + messages[x].name + "</h1>");
-                                $("#text").remove();
-                                for (let line in messages[x].text)
-                                    $("body").append("<p>" + messages[x].text[line].l + "</p>");
-                            });
+            function after() {
+                x < (messages.length - 1) ? x++ : x = 0;
+            }
 
-
-                            if (now >= messages[x].times[t].dates.from && now <= messages[x].times[t].dates.to) {
-                                console.log("yes " + now.toLocaleDateString() + " is in " + messages[x].times[t].dates.from.toLocaleDateString() + " to " + messages[x].times[t].dates.to.toLocaleDateString())
-                                if (-1 !== messages[x].times[t].days.indexOf(now.getDay())) {
-                                    console.log("yes " + now.getDay() + " is in " + messages[x].times[t].days);
-                                    if (now.getHours() >= messages[x].times[t].hours.from && now.getHours() <= messages[x].times[t].hours.to) {
-                                        console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
-                                        if ((now.getHours() === messages[x].times[t].hours.from && now.getMinutes() < messages[x].times[t].minutes.from) || ((now.getHours() === messages[x].times[t].hours.to) && (now.getMinutes() > messages[x].times[t].minutes.to))) {
-                                            console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
-                                        } else {
-                                            console.log("yes " + now.toLocaleTimeString() + " is in " + messages[x].times[t].minutes.from + " to " + messages[x].times[t].minutes.to)
-                                        }
-                                        $("body").load(messages[x].template, function () {
-                                            for (let image in messages[x].img)
-                                                $("picture").append("<img src=\"" + messages[x].img[image].i + "\"style=\"height:200px;\" />");
-                                            $("h1").replaceWith("<h1>" + messages[x].name + "</h1>");
-                                            $("#text").remove();
-                                            for (let line in messages[x].text)
-                                                $("body").append("<p>" + messages[x].text[line].l + "</p>");
-                                        });
-                                    } else
-                                        console.log("no " + now.toLocaleTimeString() + " is not in " + messages[x].times[t].hours.from + " to " + messages[x].times[t].hours.to)
-                                } else
-                                    console.log("no " + now.getDay() + " is not in " + messages[x].times[t].days)
-                            } else
-                                console.log("no " + now.toLocaleDateString() + " is not in " + messages[x].times[t].dates.from.toLocaleDateString() + " to " + messages[x].times[t].dates.to.toLocaleDateString())
-                        }
-                    }
-                }
-
-                function after() {
-                    x < (messages.length - 1) ? x++ : x = 0;
-                }
-
-                function later() {
-                    clearInterval(run);
-                    run = setInterval(arrIterator, messages[x].duration);
-                }
+            function later() {
+                clearInterval(run);
+                run = setInterval(arrIterator, messages[x].duration);
             }
         }
-    );
+
+    });
 </script>
 <head>
     <meta charset="UTF-8">

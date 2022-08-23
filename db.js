@@ -178,7 +178,7 @@ let chooseMsgs=function (){
         let collection = dbo.collection("Messages");
         collection.find({
            screen: scr/*,
-            "times.t.days": day,
+            from: day,
                "times.t.dates.from": {$lte: now},
                 "times.t.dates.to": {$gte: now},
                 "times.t.hours.from": {$lte: hour},
@@ -188,8 +188,8 @@ let chooseMsgs=function (){
         }
 
         ).toArray(function (err,queryResult){ if (err) throw err;
-            console.log(queryResult);
-
+            //console.log(queryResult);
+            result = queryResult;
             db.close();
         });
 
@@ -199,5 +199,6 @@ let chooseMsgs=function (){
 
 exports.createMsgsCollection=createMsgsCollection;
 exports.chooseMsgs=chooseMsgs;
+module.exports.ress=result;
 
 
